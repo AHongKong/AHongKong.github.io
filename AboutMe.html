@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head> 
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <title>About Me</title>
+      <meta name="description" content="{% if page.description %}{{ page.description | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+
+      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+      <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+      <link rel="stylesheet" href="//cdn.rawgit.com/konpa/devicon/master/devicon.min.css">
+      <link rel="stylesheet" href="css/main.css">
+  </head>
+  <body>      
+   
+      <section id="projects">
+              <div class="container">
+        <div class="user-details">
+          <h3> 我的技能 </h3>
+          <p> 技能描述 </p>
+        </div>
+        <div class="row user">
+          <div class="four columns">
+            <h4>Design</h4>
+            <i class="devicon-html5-plain-wordmark"></i>
+            <i class="devicon-bootstrap-plain-wordmark colored"></i>
+            <i class="devicon-sass-original colored"></i>
+            <p>技能1</p>
+          </div>
+          <div class="four columns">
+            <h4>Code</h4>
+            <i class="devicon-javascript-plain colored"></i>
+            <i class="devicon-react-original-wordmark colored"></i>
+            <i class="devicon-nodejs-plain-wordmark"></i>
+            <p>技能2</p>
+          </div>
+          <div class="four columns">
+            <h4>Tools</h4>
+            <i class="devicon-git-plain"></i>
+            <i class="devicon-gulp-plain colored"></i>
+            <i class="devicon-atom-original-wordmark"></i>
+            <p>技能3</p>
+          </div>
+        </div>
+      </div>
+      </section>
+
+      <section id="about">
+          <div class="container">
+            <div class="user-details">
+              <h3> 项目 </h3>
+            </div>
+            <div class="row user-projects">
+              <div class="six columns images">
+                <img alt="mountains" src="/images/mountains.jpg" />
+              </div>
+              <div class="six columns">
+                <h5> 码集 </h5>
+                <li> Featured Skills</li>
+                <p> 码集详情 </p>
+                <a class="project-link" href="https://itunes.apple.com/cn/app/%E7%A0%81%E9%9B%86/id1213837414?mt=8">Check it out</a>
+              </div>
+            </div>
+            <div class="row user-projects">
+              <div class="six columns">
+                <img alt="mountains" src="/images/skate.jpg" />
+              </div>
+              <div class="six columns">
+                <h5> 老师说 </h5>
+                <ul>
+                  <li> Featured Skills</li>
+                </ul>
+                <p>老师说详情</p>
+                <a class="project-link" href="#">Check it out</a>
+              </div>
+            </div>
+          </div>
+      </section>
+	</body>
+</html>
