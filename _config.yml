@@ -4,7 +4,7 @@ description: > # this means to ignore newlines until "baseurl:"
   iOS developer is who I am! You can call me Hong! This blog is just for my persional using. If there is some 
   mistake in my writting,take it easy! I write blog just for fun now. I don't like to write blog for a long time too.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://ahongkong.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: noRegister
 github_username:  AHongKong
 
