@@ -2,7 +2,6 @@
 layout: post
 title:  "设计产品认知"
 date:   2017-04-13 13:40:34 +0800
-tags: all portfolio something
 categories: 产品流程 UI设计流程
 ---
 
