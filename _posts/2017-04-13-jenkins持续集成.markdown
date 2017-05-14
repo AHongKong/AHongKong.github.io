@@ -1,0 +1,99 @@
+---
+layout: post
+title:  "Jenkins 持续集成"
+date:   2017-04-13 13:40:34 +0800
+categories: 测试 unfinished
+---
+
+操作系统：Mac OS
+
+step 1:
+
+	[点击此处到jenkins官网下载Mac OS的安装包](https://jenkins.io/index.html)
+
+step 2:
+
+	下载完成后，点击Jenkins的pkg安装包，完成安装引导步骤。
+	
+	会碰到的问题：How to “Unlock Jenkins”?
+	
+	解决方案：
+	在终端执行👇的命令，可以获取密码。ps（路径需要更换成你的initialAdminPassword的提示路径）
+	
+	sudo more /Users/Shared/Jenkins/Home/secrets/initialAdminPassword
+
+
+step 3:
+
+	Customize Jenkins 安装需要的插件
+	安装GitLab插件
+	因为我们用的是GitLab来管理源代码，Jenkins本身并没有自带GitLab插件，所以我们需要依次选择 系统管理->管理插件，在“可选插件”中选中“GitLab Plugin”和“Gitlab Hook Plugin”这两项，然后安装。
+	
+	安装Xcode插件
+	同安装GitLab插件的步骤一样，我们依次选择系统管理->管理插件，在“可选插件”中选中“Xcode integration”安装。
+	
+	安装签名证书管理插件
+	iOS打包内测版时，需要发布证书及相关签名文件，因此这两个插件对于管理iOS证书非常方便。还是在系统管理->管理插件，在“可选插件”中选中“Credentials Binding Plugin”和“Keychains and Provisioning Profiles Management”安装。
+	
+	安装FTP插件
+	在系统管理->管理插件，在“可选插件”中选中“Publish over FTP”安装。
+
+	安装脚本插件
+	这个插件的功能主要是用于在build后执行相关脚本。在系统管理->管理插件，在“可选插件”中选中“Global Post Script Plugin”安装。
+
+step 4:
+
+自动化构建
+新建项目Item -> 输入Item name -> 选择一个自由风格的软件项目 -> 点击OK
+
+配置项目 -> 路径：Jekins/项目名/配置/General 描述项目基本信息
+
+配置项目 -> 路径：Jekins/项目名/配置/源码管理 描述git Repositories
+
+[配置其他参照简书一篇文章](http://www.jianshu.com/p/41ecb06ae95f)
+
+Keychains and Provisioning Profiles Management 的配置
+
+`关于keychains的查找`
+
+终端输入命令
+	
+	~/Library/Keychains
+	ls
+	查找login.keychain 或者login_renamed_2.keychain 看哪个是可以用的，直接到目录下拷贝一份上传到Jenkins。
+
+[点击查看](http://www.jianshu.com/p/e19c8327b167)
+Code Signing Identity 和配置Xcode的Code Signing Identity是一样的名字
+
+`Provisioning Profile 查找与上传`
+一般iOS开发者的电脑都会有，打开Xcode/preference/Accounts/开发者账号，点击view details，点击对应的描述证书，双击，选择菜单中的show in finder，拷贝一份，上传。
+
+构建配置
+
+点击添加构建步骤，选择execute shell，可以在command输入框中输入对应执行的命令
+
+构建后的操作
+
+点击添加构建后的操作步骤，选择Execute a set of scripts
+
+完成上述工作。
+___
+自动打包：GUI打包（使用Xcode），命令行打包（重点）
+
+[xcodebuild](https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man1/xcodebuild.1.html)
+
+[xcrun](https://developer.apple.com/legacy/library/documentation/Darwin/Reference/ManPages/man1/xcrun.1.html)
+
+	xcrun -sdk iphoneos -v PackageApplication + 一些参数
+
+自动化打包脚本
+
+第一种：xcodebuild + xcrun 打包脚本（步骤易读）
+xcodebuild 有一个叫[xctool](https://github.com/facebook/xctool)的工具集facebook出品
+
+第二种：gym 打包脚本
+fastlane是一套自动化打包的工具集，用 Ruby 写的，用于 iOS 和 Android 的自动化打包和发布等工作。gym是其中的打包命令。
+
+最后一步，上传分发平台的脚本
+
+学习的Jenkins结成参考博客：简书作者[一缕殇流化隐半边冰霜](http://www.jianshu.com/p/41ecb06ae95f)

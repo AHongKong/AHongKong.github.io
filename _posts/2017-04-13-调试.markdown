@@ -1,0 +1,61 @@
+---
+layout: post
+title:  "调试"
+date:   2017-04-13 13:40:34 +0800
+tags: all portfolio something
+categories: iOS
+---
+
+
+####控制台打印设置
+
+//OC版
+
+{% highlight bash lineanchors %}
+#ifdef DEBUG
+#define DLog(fmt, ...) NSLog((@"<%s : %d> %s  " fmt), [[[NSString stringWithUTF8String:__FILE__] lastPathComponent]   UTF8String], __LINE__, __PRETTY_FUNCTION__,  ##__VA_ARGS__);
+#else
+    #define DLog(...)
+#endif
+{% endhighlight %}
+
+####断点
+
+1. 普通断点
+2. 异常断点
+3. 条件断点
+4. 符号断点
+
+
+####[LLDB](http://lldb.llvm.org/tutorial.html)
+* po (print object)输出对象, 如 po [self view];
+* p （print）用于输出基本类型, 如 p (int)[[[self view] subviews] count] 输出子视图个数。
+* expr (expression) 可以在调试时动态执行指定表达式，并将结果打印出来。常用于在调试过程中修改变量的值。例如上图所示，程序第一次执行到断点时
+执行下面的指令：expr i=4
+你会看到如下的输出: (int) $0 = 4
+继续运行程序，程序输出的信息是：value:4 i==4
+* call call即是调用的意思。其实上述的po和p也有调用的功能。因此一般只在不需要显示输出，或是方法无返回值时使用call。我们可以在viewDidLoad:里面设置断点，然后在程序中断的时候输入下面的命令： call [self.view setBackgroundColor:[UIColor redColor]] 此时view的背景颜色变为红色。
+* bt 打印调用堆栈，加all可打印所有thread的堆栈。不详细举例说明，感兴趣的朋友可以自己试试。
+* fr v -R 命令来打印出变量的未加工过时的信息
+* watchpoint
+
+
+	
+		(lldb) watchpoint set v _str
+		Watchpoint created: Watchpoint 1: addr = 0x7f93b8717728 size = 8 state = enabled type = w
+		    watchpoint spec = '_str'
+		    new value: 0x0000000105b1e228
+		
+		Watchpoint 1 hit:
+		old value: 0x0000000105b1e228
+		new value: 0x0000000000000000
+
+
+
+####以下是不了解的方式
+
+Chisel是 facebook开源的用于界面调试的lldb命令。
+
+调试工具集：FLEX
+
+界面调试利器： Reveal
