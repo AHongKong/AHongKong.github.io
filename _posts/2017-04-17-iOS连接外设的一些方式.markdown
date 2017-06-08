@@ -1,9 +1,7 @@
 ---
 layout: post
 title:  "iOS连接外设的几种方式"
-date:   2017-04-13 13:40:34 +0800
-tags: all portfolio something
-categories: iOS unfinished
+date:   2017-04-17 13:40:34 +0800
 ---
 
 

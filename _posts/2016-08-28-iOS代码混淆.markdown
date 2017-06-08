@@ -1,0 +1,108 @@
+---
+layout: post
+title:  "iOS代码混淆"
+date:   2016-08-28 13:40:34 +0800
+categories: 安全 
+---
+
+项目工程中必须有pch 文件
+
+`pcth的添加步骤`
+
+File > New > File > iOS > Other > PCH File 
+
+搜索Prefix Header
+
+添加Prefix Header路径 项目名／Prefix Header名，
+Precompile Prefix Header 设置为YES
+
+`混淆步骤`
+
+ **在项目主目录下添加confuse.sh shell脚本和func.list 文件**
+
+func.list文件是用来存放需要混淆的名字（属性名，方法名）
+举个例子：下面是我们需要混淆的属性名和方法名
+
+	@property (nonatomic, copy) NSString *name;
+	
+	+ (void)sayHi;
+我们只需要在func.list输入
+	
+	name
+	sayHi
+
+
+confuse.sh 是用来生成混淆的脚本，产生宏定义替换属性名和方法名
+
+	#!/usr/bin/env bash
+	
+	TABLENAME=symbols
+	SYMBOL_DB_FILE="symbols"
+	STRING_SYMBOL_FILE="func.list"
+	HEAD_FILE="$PROJECT_DIR/$PROJECT_NAME/codeObfuscation.h"
+	export LC_CTYPE=C
+	
+	#维护数据库方便日后作排重
+	createTable()
+	{
+	    echo "create table $TABLENAME(src text, des text);" | sqlite3 $SYMBOL_DB_FILE
+	}
+	
+	insertValue()
+	{
+	    echo "insert into $TABLENAME values('$1' ,'$2');" | sqlite3 $SYMBOL_DB_FILE
+	}
+	
+	query()
+	{
+	    echo "select * from $TABLENAME where src='$1';" | sqlite3 $SYMBOL_DB_FILE
+	}
+	
+	ramdomString()
+	{
+	    openssl rand -base64 64 | tr -cd 'a-zA-Z' |head -c 16
+	}
+	
+	rm -f $SYMBOL_DB_FILE
+	rm -f $HEAD_FILE
+	createTable
+	
+	touch $HEAD_FILE
+	echo '#ifndef Demo_codeObfuscation_h
+	#define Demo_codeObfuscation_h' >> $HEAD_FILE
+	echo "//confuse string at `date`" >> $HEAD_FILE
+	cat "$STRING_SYMBOL_FILE" | while read -ra line; do
+	    if [[ ! -z "$line" ]]; then
+	        ramdom=`ramdomString`
+	        echo $line $ramdom
+	        insertValue $line $ramdom
+	        echo "#define $line $ramdom" >> $HEAD_FILE
+	    fi
+	done
+	echo "#endif" >> $HEAD_FILE
+	
+	
+	sqlite3 $SYMBOL_DB_FILE .dump
+
+** 在pch中添加脚本中指定的混淆头文件 codeObfuscation.h**
+
+	#ifndef PrefixHeader_pch
+	#define PrefixHeader_pch
+	
+	#import "codeObfuscation.h"//混淆头文件引入
+
+	#endif
+
+此时产生编译错误，没有找到codeObfuscation.h，没多大关系，因为我们还没有关联脚本运行脚本文件。
+
+ **下面是关联运行confuse.sh的步骤：**
+
+	Build Phase 点击左上角的＋按钮，选择New Run Script Phrase
+
+	在输入框中输入$PROJECT_DIR/confuse.sh
+
+	cmd ＋ b 重新编译项目，编译成功。
+
+到编译纪录中可查看到已经为我们的项目生成了很多宏定义。混淆成功。这下class dump 出来的头文件就看不到方法名了。
+[念茜安全博客 第23篇](http://blog.csdn.net/yiyaaixuexi/article/details/29201699)
+[简书作者iOS代码混淆](http://www.jianshu.com/p/98227950a474)

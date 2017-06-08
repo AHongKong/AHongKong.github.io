@@ -1,0 +1,245 @@
+---
+layout: post
+title:  "开发笔记1"
+date:   2015-07-29 17:38:34 +0800
+categories: 笔记
+---
+
+
+###开发细碎
+
+
+
+---
+很多年前写的的，整理的时候看到了就顺便上传上来！
+___
+* <font color=green>关于pch</font>
+
+1. pch全称是“precompiled header”，也就是预编译头文件
+2. 使用：存放的工程中一些不常被修改的代码，比如常用的框架头文件
+3. 目的：提高编译速度
+4. 注意：添加的文件最好是是很少变动或不变动的头文件或者是预编译的代码片段；
+5. 用xcode创建pch文件：
+
+<img src= file:///Users/zhengjiaohong/Desktop/markdown_file/image/pch.png   style = display:block;  height= "200px"; width= "200px"；margin: 0  auto; >
+
+6. 命名：AppNamePrefix.pch
+
+---
+* <font color=green>关于调试</font>
+
+1. 要求：发布正式版时屏蔽掉NSLog的输出
+2. 解决方案：在pch中宏定义自己的log
+
+---
+* <font color=green>SVN管理时XCode中显示的各种标示符号</font>
+
+1.  代码中 某文件后面有 “M” 标记，表示该文件已被修改，需要 commit.
+      （右键该文件 -> source control -> commit selected file...）
+2. 代码中 某文件后面有 “A” 标记，表示该文件是新添加的，已受SVN管理，需要 commit.
+      （右键该文件 -> source control -> commit selected file...）
+3. 代码中 某文件后面有 “?” 标记，表示该文件是新添加的，并且脱离了SVN的管理，首先需要add，然后 commit.
+      （右键该文件 -> source control -> Add，这样该文件的标记就变为 “A”，然后在 commit）
+4. 代码中 某文件后面有 “D” 标记，表示该文件在服务器上已被删除，这时update的话，可删除本地的文件。
+5. 代码中 某文件后面有 “C” 标记，表示该文件与服务器的文件冲突。
+
+6. 代码中 某文件后面有 “R” 标记, 表示
+
+---
+* <font color=green>Xcode类前缀的设置</font>
+
+<img src= file:///Users/zhengjiaohong/Desktop/markdown_file/image/Xcode类前缀.png  style = display:block;  height= "200px"; width= "300px"；margin: 0  auto; >
+
+---
+* <font color=green>获取沙盒的路径一定要做成工具类方便重用</font>
+
+1. 获取总目录
+
+ NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+
+    NSString *path = [paths objectAtIndex:0];
+
+    NSLog(@"%@",path);
+
+2. 获取document目
+
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+
+    NSString *path = [paths objectAtIndex:0];
+  NSLog(@"path:%@",path);
+
+3. 获取Cache目录
+
+	NSArray *pahts = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+
+	NSString *path = [pahts objectAtIndex:0];
+
+    NSLog(@"%@",path);
+
+4. 获取Library目录
+
+    NSArray *pahts = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+
+    NSString *path = [pahts objectAtIndex:0];
+
+    NSLog(@"%@",path);
+
+5. 获取temp目录
+
+    NSString *temDir = NSTemporaryDirectory();
+
+    NSLog(@"%@",temDir);
+
+6. 获取沙盒路径//必须自己手动拼接目录下的其他文件
+
+	NSString *mainDir = NSHomeDirectory();
+
+---
+* <font color=green>storyboard，xib 观看xml格式修改冲突</font>
+
+	open as source code 查看XML
+
+---
+* <font color=green>UUID和UDID的区别</font>
+
+	UUID：应用的唯一标示
+	UDID：设备的唯一标示
+
+---
+* <font color=green>模拟器键盘显示或隐藏设置</font>
+
+	模拟器——》hardWare——》keyboard 进行设置
+
+---
+* <font color=green>小数的四舍五入</font>
+
+	round：如果参数是小数，则求本身的四舍五入。
+
+	ceil：如果参数是小数，则求最小的整数但不小于本身.
+
+	floor：如果参数是小数，则求最大的整数但不大于本身. 
+
+	Example:如何值是3.4的话，则
+
+	3.4 -- round 3.000000
+
+	      -- ceil 4.000000
+
+	      -- floor 3.00000
+
+---
+* <font color=green>过滤字符串（去空格，换行符号）</font>
+
+	NSString *temptext = [messageTextField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+
+	NSString *text = [temptext stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet ]];
+
+---
+* <font color=green>触控板3指拖拽功能设置</font>
+
+<img src= file:///Users/zhengjiaohong/Desktop/markdown_file/image/触控屏幕设置.png  style = display:block;  height= "200px"; width= "300px"；margin: 0  auto; >
+
+---
+* <font color=green>SVN项目冲突解决</font>
+
+	遇到冲突导致工程打不开：显示Xcodeproj的包内容，查找“mine”，删除冲突提示
+
+<img src= file:///Users/zhengjiaohong/Desktop/markdown_file/image/SVN冲突.png  style = display:block;  height= "200px"; width= "300px"；margin: 0  auto; >
+
+---
+* <font color=green>dictionary的坑</font>
+
+	NSDictionary *dic = @{@"key":value}
+
+	如果你的value是为nil 必将引发崩溃：
+	[__NSPlaceholderDictionary initWithObjects:forKeys:count:]: attempt to insert nil object from objects[2]’
+
+---
+* <font color=green>Xcode 插件路径</font>
+
+	`~/Library/Application Support/Developer/Shared/Xcode/Plug-ins/
+
+---
+* <font color=green>IOS应用之间调用</font>
+
+	1. 在appA的info.plist中定义URL，就是在文件中添加URL types一项。可按下图进行添加
+<img src= file:///Users/zhengjiaohong/Desktop/markdown_file/image/URLScheme.jpeg  style = display:block;  height= "200px"; width= "500px"；margin: 0  auto; >
+	2.  在appB的代码中打开刚才定义的URL，代码如下
+
+		NSURL *url = [NSURL URLWithString:@"myapp:"];  
+
+		[[UIApplication sharedApplication] openURL:url];  
+
+	3. 打开之后，会调用appA的AppDelegate的
+
+		-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation ｛｝
+
+	4. 判断是否能打开应用
+
+		[[UIApplication sharedApplication] canOpenURL:[NSURLURLWithString:@"myapp://"]];
+
+---
+* <font color=green>Xcode快捷键补充</font>
+
+	command ＋ ’  遍历警告
+
+---
+* <font color=green>NSAssert</font>
+
+	NSAssert(view, @"View must not be nil.”);
+
+	NSAssert(x!=0,@"x must not be zero");
+	在表达式“x!=0”不成立时，程序就会抛出异常，并显示自定义的消息"x must not be zero"，并同时显示出错的文件、代码和调用函数等信息，是一个程序追踪的很好手段。
+
+	假设x!=0，不满足要求就提示reason-x must not be zero
+
+---
+* <font color=green>下载的应用编译报错</font>
+
+	-pie can only be used when targeting iOS 4.2 or later
+
+	解决：development target 设置 高于 4.2 就好了
+
+---
+* <font color=green>TableView 局部刷新</font>
+
+	    局部section刷新
+
+	    NSIndexSet * nd=[[NSIndexSet alloc]initWithIndex:1];
+
+	    [tview reloadSections:nd withRowAnimation:UITableViewRowAnimationAutomatic];
+
+	    局部cell刷新
+
+	    NSIndexPath *te=[NSIndexPath indexPathForRow:2 inSection:0];
+
+	    [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:te,nil] withRowAnimation:UITableViewRowAnimationMiddle];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+

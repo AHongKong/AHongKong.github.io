@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "TabBar 使用注意事项"
-date:   2017-04-13 13:40:34 +0800
+date:   2016-06-19 13:40:34 +0800
 categories: iOS
 ---
 ####icon-image 渲染模式

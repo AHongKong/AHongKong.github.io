@@ -1,0 +1,11 @@
+---
+layout: post
+title:  "MV（X）或者VIPER模式"
+date:   2017-04-12 13:40:34 +0800
+tags: all portfolio something
+categories:技术 iOS
+---
+
+MV（X）是在MVC、MVVM、MVP三种模式的集合。
+MVP 是指passive View、presenter、Model三大块组成的设计方案。
+VIPER 是指有View、Interactor、Presenter、Entity、Router 组成的开发模式划分。

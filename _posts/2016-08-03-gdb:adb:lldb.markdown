@@ -1,9 +1,7 @@
 ---
 layout: post
 title:  "gdb/adb/lldb"
-date:   2017-04-13 13:40:34 +0800
-tags: all portfolio something
-categories: 测试 调试
+date:   2016-08-03 13:40:34 +0800
 ---
 
 

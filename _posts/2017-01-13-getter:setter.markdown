@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "getter/setter"
-date:   2017-04-13 13:40:34 +0800
+date:   2017-01-13 13:40:34 +0800
 categories: iOS
 ---
 
