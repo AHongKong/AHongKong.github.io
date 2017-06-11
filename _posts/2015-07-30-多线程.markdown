@@ -7,9 +7,9 @@ categories: 笔记
 ---
 
 
-###关于线程
+### 关于线程
 
-####在 iOS 中其实目前有 4 套多线程方案，他们分别是：
+#### 在 iOS 中其实目前有 4 套多线程方案，他们分别是：
 
 * Pthreads
 
@@ -21,7 +21,7 @@ categories: 笔记
 
 ---
 
-####Pthreads
+#### Pthreads
 
 	    #import <pthread.h>
 
@@ -39,7 +39,7 @@ categories: 笔记
 
 ---
 
-####NSThread
+#### NSThread
 
 		描述：它的生命周期还是需要我们手动管理，所以这套方案也是偶尔用用，比如 [NSThread currentThread]，它可以获取当前线程类，你就可以知道当前线程的各种属性，用于调试十分方便。
 
@@ -97,11 +97,11 @@ categories: 笔记
 
 ---
 
-####GCD
+#### GCD
 
 		它是苹果为多核的并行运算提出的解决方案，所以会自动合理地利用更多的CPU内核（比如双核、四核），最重要的是它会自动管理线程的生命周期（创建线程、调度任务、销毁线程），完全不需要我们管理，我们只需要告诉干什么就行。
 
-#####任务和队列
+##### 任务和队列
 
 		任务：即操作，你想要干什么，说白了就是一段代码，在 GCD 中就是一个 Block，所以添加任务十分方便。
 
@@ -136,12 +136,12 @@ categories: 笔记
   </tr>
 </table>
 
-####主队列
+#### 主队列
 
 		这是一个特殊的 串行队列。什么是主队列，大家都知道吧，它用于刷新 UI，任何需要刷新 UI 的工作都要在主队列执行，所以一般耗时的任务都要放到别的线程执行。
 		dispatch_queue_t queue = dispatch_get_main_queue();
 
-####自己创建的队列
+#### 自己创建的队列
 
 		第一个参数是标识符，用于 DEBUG 的时候标识唯一的队列，可以为空。
 		第二个参数用来表示创建的队列是串行的还是并行的
@@ -151,12 +151,12 @@ categories: 笔记
 		  //并行队列
 		  dispatch_queue_t queue = dispatch_queue_create("tk.bourne.testQueue", DISPATCH_QUEUE_CONCURRENT);
 
-####全局并行队列
+#### 全局并行队列
 
 		只要是并行任务一般都加入到这个队列。这是系统提供的一个并发队列。
 		  dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
 
-###创建任务
+### 创建任务
 
 * 同步任务
 
@@ -172,9 +172,9 @@ categories: 笔记
       NSLog(@"%@", [NSThread currentThread]);
   });
 
-####死锁
+#### 死锁
 
-####队列组
+#### 队列组
 
 		队列组可以将很多队列添加到一个组里，这样做的好处是，当这个组里所有的任务都执行完了，队列组会通过一个方法通知我们。
 
@@ -213,7 +213,7 @@ categories: 笔记
 
 
 ---
-####NSOperation和NSOperationQueue
+#### NSOperation和NSOperationQueue
 
 
 		NSOperation 是苹果公司对 GCD 的封装，完全面向对象，所以使用起来更好理解。 大家可以看到 NSOperation 和 NSOperationQueue 分别对应 GCD 的 任务 和 队列 。特点：你不用管串行、并行、同步、异步这些名词。NSOperationQueue 有一个参数 maxConcurrentOperationCount 最大并发数，用来设置最多可以让多少个任务同时执行。当你把它设置为 1 的时候，就串行了。
@@ -364,7 +364,7 @@ categories: 笔记
 ---
 
 ---
-####延迟执行
+#### 延迟执行
 
 NSObject：
 
@@ -419,7 +419,7 @@ static id _instance;
 ---
 
 ---
-####从其他线程回到主线程的方法
+#### 从其他线程回到主线程的方法
 
 		//NSObject
 

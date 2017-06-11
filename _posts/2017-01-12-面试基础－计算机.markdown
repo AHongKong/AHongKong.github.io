@@ -6,7 +6,7 @@ tags: all portfolio something
 categories: iOS
 ---
 
-###面试时经常被问到的基础
+### 面试时经常被问到的基础
 👇这个链接的整理比较完整，对一些感觉自己基础比较差又无从下手的我们来说可是一大干货集。特此分享，也提供自己查缺补漏～～～
 
 [iOS面试基础原理](https://hit-alibaba.github.io)

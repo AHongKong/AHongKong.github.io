@@ -4,14 +4,14 @@ title:  "TabBar 使用注意事项"
 date:   2016-06-19 13:40:34 +0800
 categories: iOS
 ---
-####icon-image 渲染模式
+#### icon-image 渲染模式
 UIImageRenderingModeAlwaysTemplate：带有tintColor 的渲染模式
 
 UIImageRenderingModeAlwaysOriginal：展示图片的原来样式
 
 	[image imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];
 
-####icon-image 位置调整
+#### icon-image 位置调整
 图片设置过大，覆盖文字调整图片边距：
     self.imageInsets = UIEdgeInsetsMake(-10, 0, 10, 0);
     
@@ -20,7 +20,7 @@ UIImageRenderingModeAlwaysOriginal：展示图片的原来样式
        top和bottom要设置成相反数，不然image的大小会一直改变
        
 
-####文字颜色设置
+#### 文字颜色设置
 
 	    [self setTitleTextAttributes:[NSDictionary
 	                                  dictionaryWithObjectsAndKeys: [UIColor colorWithRed:100.0 / 255.0 green:100.0 / 255.0 blue:100.0 / 255.0 alpha:1],
@@ -29,10 +29,10 @@ UIImageRenderingModeAlwaysOriginal：展示图片的原来样式
 	                                  dictionaryWithObjectsAndKeys: [UIColor brownColor],
 	                                  NSForegroundColorAttributeName, nil] forState:UIControlStateNormal];
 	                                  
-####隐藏topLine
+#### 隐藏topLine
 
     [self.tabBar setShadowImage:[UIImage new]];
 
-####设置tabBar背景图片
+#### 设置tabBar背景图片
     self.tabBar.backgroundImage = [UIImage imageNamed:@"cm2_btm_bg"];
 	                                  

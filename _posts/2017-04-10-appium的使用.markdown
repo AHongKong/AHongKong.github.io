@@ -2,10 +2,9 @@
 layout: post
 title:  "appium的使用"
 date:   2017-04-10 13:40:34 +0800
-categories: 测试
 ---
 
-####AppUI自动化
+#### AppUI自动化
 
 `实质:`发送指令获取元素，计算元素坐标，自动化驱动程序根据指令对元素进行操作。
 
@@ -27,7 +26,7 @@ categories: 测试
 	
 	MonkeyTalk：缺点是收费
 
-####Appium
+#### Appium
 
 Appium不是一个自动化驱动程序，它是一个server，指令的转发者，调度其他自动化驱动框架（UIAUTOMATOR）执行。涉及到脚本执行客户端，appium server，以及设备。
 

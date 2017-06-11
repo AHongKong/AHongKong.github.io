@@ -18,7 +18,7 @@ Precompile Prefix Header 设置为YES
 
 `混淆步骤`
 
- **在项目主目录下添加confuse.sh shell脚本和func.list 文件**
+ ** 在项目主目录下添加confuse.sh shell脚本和func.list 文件 **
 
 func.list文件是用来存放需要混淆的名字（属性名，方法名）
 举个例子：下面是我们需要混淆的属性名和方法名
@@ -84,7 +84,7 @@ confuse.sh 是用来生成混淆的脚本，产生宏定义替换属性名和方
 	
 	sqlite3 $SYMBOL_DB_FILE .dump
 
-** 在pch中添加脚本中指定的混淆头文件 codeObfuscation.h**
+** 在pch中添加脚本中指定的混淆头文件 codeObfuscation.h **
 
 	#ifndef PrefixHeader_pch
 	#define PrefixHeader_pch
@@ -95,7 +95,7 @@ confuse.sh 是用来生成混淆的脚本，产生宏定义替换属性名和方
 
 此时产生编译错误，没有找到codeObfuscation.h，没多大关系，因为我们还没有关联脚本运行脚本文件。
 
- **下面是关联运行confuse.sh的步骤：**
+ ** 下面是关联运行confuse.sh的步骤：**
 
 	Build Phase 点击左上角的＋按钮，选择New Run Script Phrase
 

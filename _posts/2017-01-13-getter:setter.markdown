@@ -7,7 +7,7 @@ categories: iOS
 
 [参考链接](http://stackoverflow.com/questions/21802069/explicit-getters-setters-for-properties-mrc)
 
-####@property (nonatomic, retain) NSNumber *count;
+#### @property (nonatomic, retain) NSNumber *count;
 
 	- (NSNumber *)count {
 	    return _count;
@@ -21,7 +21,7 @@ categories: iOS
 	    }
 	}
 
-####@property (nonatomic, copy) NSNumber *count;
+#### @property (nonatomic, copy) NSNumber *count;
 
 	- (NSNumber *)count {
 	    return _count;
@@ -34,7 +34,7 @@ categories: iOS
 	}
 	
 	
-####@property (atomic, retain) NSNumber *count;
+#### @property (atomic, retain) NSNumber *count;
 
 	- (NSNumber *)count {
 	    NSNumber *count;
@@ -52,7 +52,7 @@ categories: iOS
 	    }
 	    [oldValue release];
 	}
-####@property (assign) NSNumber *count;
+#### @property (assign) NSNumber *count;
 
 	- (NSNumber *)count {
 	    NSNumber *count;

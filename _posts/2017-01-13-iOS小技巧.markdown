@@ -5,7 +5,7 @@ date:   2017-01-13 13:40:34 +0800
 categories: iOS unfinished
 ---
 
-####实现协议的继承
+#### 实现协议的继承
 
 @protocol protocolName1 <NSObject>
 方法列表
@@ -17,18 +17,18 @@ categories: iOS unfinished
 ……
 @end
 
-####@synthesize 关键字
+#### @synthesize 关键字
 @synthesize beginTime;
 
 @synthesize表示由编译器来自动实现beginTime的getter/setter方法，不需要你自己再手动去实现。
 
-####@protocol 关键字
+#### @protocol 关键字
 @property 主要的作用就在于封装对象中的数据。
 
 @property = ivar + getter + setter;
 作用是：在编译期自动合成
 
-####协议里声明属性
+#### 协议里声明属性
 @protocol protocolName1 <NSObject>
 @property CFTimeInterval beginTime;
 （不可以声明成员变量）
@@ -45,15 +45,15 @@ categories: iOS unfinished
 这样编译器可以自动生成getter，setter 方法，引用该变量也不会崩溃。
 
 
-####Category不允许声明属性
+#### Category不允许声明属性
 
 声明属性的时候，需要使用runtime关联属性。
 
-####@dynamic关键字
+#### @dynamic关键字
 
 @dynamic指令告诉编译器在编译期间不自动生成getter和setter方法，避免编译期间产生警告。然后由自己实现存取方法或存取方法在运行时动态创建绑定。（动态绑定getter，setter，编译器不报错）当子类重载父类已经定义过的属性，会提示子类不会自动合成实例变量，必须 使用@synthesize来手动合成ivar或者使用@dynamic方法自动管理getter，setter方法。
 
-####ARC下不显示指定任何属性关键字时，默认的关键字都有哪些？
+#### ARC下不显示指定任何属性关键字时，默认的关键字都有哪些？
 
 对应基本数据类型默认关键字是
 
@@ -63,7 +63,7 @@ atomic,readwrite,assign
 
 atomic,readwrite,strong
 
-####atomic与nonatomic
+#### atomic与nonatomic
 atomic:默认是有该属性的，这个属性是为了保证程序在多线程情况下，编译器会自动生成一些互斥加锁代码，避免该变量的读写不同步的问题，提供多线程安全。
 nonatomic:如果该对象无需考虑多线程的情况，请加入这个属性，这样会让编译器少生成一些互斥加锁代码，禁止多线程，变量保护，提高性能和效率。
 
